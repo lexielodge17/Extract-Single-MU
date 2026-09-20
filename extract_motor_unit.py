@@ -365,6 +365,8 @@ def extract_MU_contours_locked(cap, x0, x1, y0, y1, FPS, WINDOW_SIZE,
             frame_idx += 1
             if frame.ndim == 3:
                 frame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+
+            # Pre-processing
             frame = cv2.GaussianBlur(frame, (5, 5), 0)
             roi = frame[y0:y1, x0:x1].astype(np.float32)
             buffer.append(roi)
