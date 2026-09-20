@@ -67,7 +67,7 @@ def estimate_baseline_noise(cap, x0, y0, x1, y1, n_frames=50):
     return np.median(noise_var_map), np.std(noise_var_map)
 
 def get_expected_search_window(stim_time_sec, fps,
-                                 delay_min_sec=0.01, delay_max_sec=0.15):
+                                 delay_min_sec, delay_max_sec):
     """Restrict twitch search to physiologically plausible window post-stimulus."""
     start_frame = int((stim_time_sec + delay_min_sec) * fps)
     end_frame = int((stim_time_sec + delay_max_sec) * fps)
@@ -332,7 +332,8 @@ def extract_MU_contours(cap, x0, x1, y0, y1, FPS, WINDOW_SIZE,
     return twitch_areas, all_contours_masks
     
 def extract_MU_contours_locked(cap, x0, x1, y0, y1, FPS, WINDOW_SIZE, 
-                               CONFIRM_WINDOW, AREA_RATIO_THRESH, noise_median, noise_std, stim_times_sec):
+                               CONFIRM_WINDOW, AREA_RATIO_THRESH, noise_median, 
+                               noise_std, stim_times_sec, delay_min_sec, delay_max_sec):
     
     roi_area = (x1 - x0) * (y1 - y0)
     
@@ -739,11 +740,16 @@ print("Twitch areas exported to twitch_areas {}.csv".format(VIDEO_ID))
 
 print(f"Number of twitch masks: {len(all_contours_masks)}")
 
-#avg_mask, prob_mask = compute_average_mask(all_contours_masks, agreement_thresh=0.5)
+cap = cv2.VideoCapture(VIDEO_PATH)
+assert cap.isOpened(), "Could not open video"
+
 try:
     avg_mask, prob_mask, thresh = compute_average_mask_adaptive(all_contours_masks, start_thresh=0.5, min_thresh=0.1, step=0.1)
 except ValueError:
     print("Unable to calculate average mask")
+    cap.release()
+    cv2.destroyAllWindows()
+    cv2.waitKey(1)
     sys.exit(1)
     
 # Extract the outer contour of the averaged mask
