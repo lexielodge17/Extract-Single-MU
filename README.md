@@ -1,6 +1,6 @@
 # Extract Single MU
 
-Detects single motor unit twitches in a ROI of an ultrasound video and extracts Feret diameters (with confidence intervals) of an averaged motor unit contour. Option to synchronise to known electrical stimulus timing, or run over the whole video.
+Detects single motor unit twitches in a ROI of an ultrasound video and extracts Feret diameters (with confidence intervals) of an averaged motor unit contour. Option to synchronise to known electrical stimulus timings, or run over the whole video.
 
 ## Overview
 
@@ -23,7 +23,7 @@ opencv-python
 numpy
 scipy
 ```
-The scripts in this package are intended to be run after after the MUNE pipeline. 
+The scripts in this package are intended to be run after after the MUNE pipeline. Requires generated values of EMG stimulus times in `motion_chunks.json` and the FPS from `motion_metrics.json`.
 
 ## Pipeline stages
 
@@ -86,6 +86,7 @@ Set these at the top of the script before running:
 |---|---|
 | `VIDEO_ID` | ID of the video, used in naming output files |
 | `VIDEO_PATH` | Path to the ultrasound video file |
+| `MOTION_CHUNKS_PATH` | Path to JSON containing stimulus times `motion_chunks.json` as generated in the MUNE pipeline |
 | `FPS` | Video frame rate. Sampling rate in `motion_metrics.json`|
 | `WINDOW_SIZE` | Number of frames in the rolling buffer used to compute temporal variance. Should approximate the expected twitch duration in frames (see [Tuning](#tuning)) |
 | `CONFIRM_WINDOW` | Number of recent frames checked for sustained detection before confirming a twitch |
