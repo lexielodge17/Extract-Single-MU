@@ -620,8 +620,7 @@ def compute_average_mask_adaptive(masks_list, start_thresh=0.5, min_thresh=0.1, 
 def calculate_mean_ferets_sd(twitch_areas):
     
     """
-    Calculate the mean maximum and minimum feret diameters with standard deviation from 
-    the calculated twitch areas
+    Calculate the mean maximum and minimum Feret diameters with standard deviation and standard error on the mean
     """
     
     max_ferets = np.array([t[3] for t in twitch_areas])
@@ -659,6 +658,12 @@ def feret_from_mask(mask, px_x_mm, px_y_mm):
 
 def bootstrap_average_feret(masks_list, agreement_thresh, px_x_mm, px_y_mm,
                              n_bootstrap=1000, seed=0):
+
+    """
+    Bootstrap resampling of the per-twitch masks (resample with replacement, 
+    rebuild the average contour, recompute Feret) gives a 95% confidence 
+    interval on the averaged contour's Feret diameters.
+    """
     rng = np.random.default_rng(seed)
     n = len(masks_list)
     max_ferets, min_ferets = [], []
