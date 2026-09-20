@@ -11,7 +11,7 @@ The pipeline takes:
 And produces:
 - A per-stimulus detection of the motor unit's active (twitching) region
 - An averaged contour across all detected twitches, with a consensus heatmap
-- A TXT of max/min Feret diameters of the averaged contour, with bootstrap confidence
+- A TXT of maximum/minimum Feret diameters of the averaged contour, with bootstrap confidence
   intervals
 - A PNG showing the heatmap with average contour overlaid on the first frame of the video
 - A CSV of per-twitch areas and Feret measurements
@@ -94,6 +94,11 @@ Set these at the top of the script before running:
 | `AREA_RATIO_THRESH` | Fraction of ROI area that must be "active" (above the MAD threshold) to count as motion in a given frame |
 | `MIN_AREA_PIXELS` | Minimum connected pixel count for a detected region to be considered a real motor unit, not noise |
 | `LOCK_TO_STIM_TIMES` | Boolean. Defines whether pipeline runs off whole video of search windows locked to known stimulus times |
+
+If `LOCK_TO_STIM_TIMES = True`, set these when calling `extract_MU_contours_locked`:
+
+| Parameter | Description |
+|---|---|
 | `delay_min_sec` | Defines how long to wait after a stimulus to start looking for twitch motion |
 | `delay_max_sec` | Defines maximum time after stimulus to look for twitch motion|
 
