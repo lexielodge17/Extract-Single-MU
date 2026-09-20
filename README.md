@@ -1,4 +1,4 @@
-# US-Single-MU
+# Extract Single MU
 
 Detects single motor unit twitches in a ROI of an ultrasound video and extracts Feret diameters (with confidence intervals) of an averaged motor unit contour. Option to synchronise to known electrical stimulus timing, or run over the whole video.
 
