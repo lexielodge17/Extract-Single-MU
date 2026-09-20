@@ -93,7 +93,13 @@ def find_values(obj, target_key, results=None):
 
 def extract_MU_contours(cap, x0, x1, y0, y1, FPS, WINDOW_SIZE, 
                         CONFIRM_WINDOW, AREA_RATIO_THRESH, noise_median, noise_std):
-    
+
+    """
+    Main detection code. Runs over whole video and detect single motor unit twitches. 
+    Outputs:
+    - twitch_areas: a list of start time, end time, area, minimum and maximum Feret diameter per twitch
+    - all_contours_masks: a list of contours of each detected twitch.
+    """
     roi_area = (x1 - x0) * (y1 - y0)
     
     # ---- Twitch area tracking ----
@@ -334,7 +340,14 @@ def extract_MU_contours(cap, x0, x1, y0, y1, FPS, WINDOW_SIZE,
 def extract_MU_contours_locked(cap, x0, x1, y0, y1, FPS, WINDOW_SIZE, 
                                CONFIRM_WINDOW, AREA_RATIO_THRESH, noise_median, 
                                noise_std, stim_times_sec, delay_min_sec, delay_max_sec):
-    
+    """
+    Main detection code. Runs over windows of the video, locked to known EMG stimulus times, 
+    and detects single motor unit twitches. 
+    Outputs:
+    - twitch_areas: a list of start time, end time, area, minimum and maximum Feret diameter per twitch
+    - all_contours_masks: a list of contours of each detected twitch.
+    """
+                                   
     roi_area = (x1 - x0) * (y1 - y0)
     
     # ---- Twitch area tracking ----
