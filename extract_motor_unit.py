@@ -663,6 +663,7 @@ def bootstrap_average_feret(masks_list, agreement_thresh, px_x_mm, px_y_mm,
 # ===================== USER PARAMETERS =====================
 VIDEO_ID = "20251021_020_L_TA_SMU"
 VIDEO_PATH = "{}.avi". format(VIDEO_ID)
+MOTION_CHUNKS_PATH = 'motion_chunks.json'
 
 FPS = 108.856232019283   # sampling_rate in motion_metrics.json
 WINDOW_SIZE = 16   # number of frames for sliding variance window
@@ -705,7 +706,7 @@ noise_median, noise_std = estimate_baseline_noise(cap, x0, y0, x1, y1)
 
 if LOCK_TO_STIM_TIMES:
    #Find stimulus times from motion_chunks
-   with open('motion_chunks.json', 'r') as f:
+   with open(MOTION_CHUNKS_PATH, 'r') as f:
        motion_chunks = json.load(f)
 
    stim_times_sec = find_values(motion_chunks, 'stimulus_time')
