@@ -88,7 +88,7 @@ Set these at the top of the script before running:
 | `VIDEO_PATH` | Path to the ultrasound video file |
 | `MOTION_CHUNKS_PATH` | Path to JSON containing stimulus times `motion_chunks.json` as generated in the MUNE pipeline |
 | `FPS` | Video frame rate. Sampling rate in `motion_metrics.json`|
-| `WINDOW_SIZE` | Number of frames in the rolling buffer used to compute temporal variance. Should approximate the expected twitch duration in frames (see [Tuning](#tuning)) |
+| `WINDOW_SIZE` | Number of frames in the rolling buffer used to compute temporal variance. Should approximate the expected twitch duration in frames. |
 | `CONFIRM_WINDOW` | Number of recent frames checked for sustained detection before confirming a twitch |
 | `MIN_DETECTIONS` | Minimum number of frames within `CONFIRM_WINDOW` that must exceed the area threshold to confirm a twitch |
 | `AREA_RATIO_THRESH` | Fraction of ROI area that must be "active" (above the MAD threshold) to count as motion in a given frame |
