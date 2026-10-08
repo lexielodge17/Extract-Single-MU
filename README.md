@@ -76,7 +76,7 @@ python extract_motor_unit.py
 9. **Per-video averaging** — contours from all confirmed twitches in a video are rasterised into binary masks and averaged pixel-wise to produce a consensus probability map (`prob_mask`) and a thresholded average mask.
 10. **Feret diameter extraction** — maximum Feret diameter and minimum Feret diameter are computed on the averaged contour and scaled to physical units (mm) using pixel calibration.
 11. **Error estimation** — a bootstrap resampling of the per-twitch masks (resample with replacement, rebuild the average contour, recompute Feret) gives a 95% confidence interval on the averaged contour's Feret diameters. Per-twitch mean ± standard deviation and standard error on the mean is also reported directly from individual twitch measurements. These values, along with the average contour's max Feret are exported as a TXT file.
-12. **Visualisation** — the consensus heatmap and average contour outline, calipers are overlaid on the first frame of the video and exported as a PNG.
+12. **Visualisation** — the consensus heatmap and average contour outline are overlaid on the first frame of the video and exported as a PNG.
 
 #### User Parameters
 
